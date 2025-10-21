@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        
     }
     void Start()
     {
@@ -25,11 +26,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space) || (Input.GetMouseButtonDown(0)))
+        {
+            canFly = true;
+        } 
     }
 
     private void FixedUpdate()
     {
         rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
+
+        if (canFly )    
+        {
+
+            rb2d.AddForce(Vector2.up * flyforce);
+        }
     }
 }
